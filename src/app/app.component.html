@@ -1,0 +1,49 @@
+<strong>Student: </strong>{{ studentName }}
+<p>
+<strong>Email: </strong>{{ studentEmail }}
+</p>
+<h3>Performance</h3>
+<table>
+    <tr>
+        <th>Points</th>
+        <th>Points Possible</th>
+        <th>Percent</th>
+        <th>Grade</th>
+    </tr>
+    <tr>
+        <td>{{ overall.pointsScored }}</td>
+        <td>{{ overall.pointsPossible }}</td>
+        <td>{{ overall.percent | percent }}</td>
+        <td>{{ overall.percent | grade }}</td>
+    </tr>
+</table>
+<hr />
+<h3>Add Assignment</h3>
+<p>
+    Assignment Name: <input type="text" [(ngModel)]="iName" />
+</p>
+<p>
+    Scored Points: <input type="number" [(ngModel)]="iScoredPoints" />
+</p>
+<p>
+    Points Possible: <input type="number" [(ngModel)]="iPossiblePoints" />
+</p>
+<button type='submit' (click)="addAssignment()">Add Assignment</button>
+
+<h3>Assignments</h3>
+<table>
+    <tr>
+        <th>Num</th>
+        <th>Assignment Name</th>
+        <th>Points Scored</th>
+        <th>Points Possible</th>
+        <th>Percent</th>
+    </tr>
+    <tr *ngFor="let assignment of assignmentsList; let num = index">
+        <td>{{ num + 1 }}</td>
+        <td>{{ assignment.name }}</td>
+        <td>{{ assignment.points}}</td>
+        <td>{{ assignment.points_possible }}</td>
+        <td>{{ assignment.percent | percent }}</td>
+    </tr>
+</table>
