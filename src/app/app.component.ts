@@ -13,18 +13,29 @@ export class AppComponent {
   iName;
   iScoredPoints;
   iPossiblePoints;
-  assignmentsList = [];
+  assignmentsList: any = [];
   overall;
 
   constructor(private studentProgressService: StudentProgressService) {
     this.overall = this.studentProgressService.overall;
+    this.refreshAssignmentList();
+  }
+
+  refreshAssignmentList() {
+    this.studentProgressService.getAssignments().subscribe(
+      data => this.assignmentsList = data
+    );
   }
 
   addAssignment() {
     console.log('addAssignment');
-    this.assignmentsList = this.studentProgressService.addAssignment(
+    this.studentProgressService.addAssignment(
       this.iName,
       this.iScoredPoints,
-      this.iPossiblePoints);
+      this.iPossiblePoints).subscribe(
+        data => {
+          this.refreshAssignmentList();
+        }
+      );
   }
 }
